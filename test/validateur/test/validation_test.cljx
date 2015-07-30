@@ -646,7 +646,7 @@
 ;; attributes-equal
 ;;
 
-(deftest test-fields-equal-to-validation
+(deftest test-attributes-equal-validation
   (let [v (vr/attributes-equal :password :confirm-password)]
     (is (= [true {}] (v {:password "test" :confirm-password "test"})))
     (is (= [false {:password #{"password must equal confirm-password"}}]))))
