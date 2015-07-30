@@ -418,7 +418,7 @@
             (equal-length-of m attribute v is     allow-nil allow-blank msg-fn-is)))))))
 
 
-(defn- attributes-equal
+(defn- are-equal
   [attribute1 attribute2]
   (fn [m]
     (let [value1   (attribute1 m)
@@ -429,7 +429,7 @@
          attribute2 #{(str " must equal " (name attribute1))}}
         nil))))
 
-(defn fields-equal [field1 field2]
+(defn attributes-equal [field1 field2]
   (let [validator (attributes-equal field1 field2)]
     (fn [m]
       (let [result (validator m)]

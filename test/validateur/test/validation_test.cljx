@@ -643,11 +643,11 @@
            (v {:id "123-abc"})))))
 
 ;;
-;; fields-equal
+;; attributes-equal
 ;;
 
 (deftest test-fields-equal-to-validation
-  (let [v (vr/fields-equal :password :confirm-password)]
+  (let [v (vr/attributes-equal :password :confirm-password)]
     (is (= [true {}] (v {:password "test" :confirm-password "test"})))
     (is (= [false {:password #{"password must equal confirm-password"}}]))))
 
