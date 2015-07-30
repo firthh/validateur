@@ -418,6 +418,22 @@
             (equal-length-of m attribute v is     allow-nil allow-blank msg-fn-is)))))))
 
 
+(defn- attributes-equal
+  [attribute1 attribute2]
+  (fn [m]
+    (let [value1   (attribute1 m)
+          value2   (attribute2 m)
+          invalid (not (= value1 value2))]
+      (if invalid
+        {attribute1 #{(str " must equal " (name attribute2))}
+         attribute2 #{(str " must equal " (name attribute1))}}
+        nil))))
+
+(defn fields-equal [field1 field2]
+  (let [validator (attributes-equal field1 field2)]
+    (fn [m]
+      (let [result (validator m)]
+        [(nil? result) result]))))
 
 (defn validate-when
   "Returns a function that, when given a map, will run the validator against that map if and
